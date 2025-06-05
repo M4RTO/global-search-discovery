@@ -115,7 +115,7 @@ public class BuscadorLuceneApplication {
 				System.out.println("Resultados encontrados: " + resultados.totalHits.value);
 				for (ScoreDoc hit : resultados.scoreDocs) {
 					Document doc = searcher.doc(hit.doc);
-					System.out.printf(" - idArticle: %s, colorId: %s, model: %s, quality: %s, price: %s, description: %s%n",
+					System.out.printf(" -  idArticle: %s, colorId: %s, model: %s, quality: %s, price: %s, description: %s%n",
 							doc.get("idArticle"),
 							doc.get("colorId"),
 							doc.get("model"),
