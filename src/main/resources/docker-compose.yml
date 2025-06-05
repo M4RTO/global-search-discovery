@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.12.2
+    container_name: elasticsearch
+    environment:
+      - node.name=elasticsearch
+      - cluster.name=demo-cluster
+      - discovery.type=single-node
+      - xpack.security.enabled=false  # desactiva seguridad para pruebas (no recomendado para producción)
+      - ES_JAVA_OPTS=-Xms1g -Xmx1g    # memoria de la JVM
+    ports:
+      - "9200:9200"  # expone API REST en localhost:9200
+      - "9300:9300"  #  puerto interno de clúster
+    volumes:
+      - es-data:/usr/share/elasticsearch/data
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.12.2
+    container_name: kibana
+    ports:
+      - "5601:5601"  # Kibana en localhost:5601
+    depends_on:
+      - elasticsearch
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+
+volumes:
+  es-data:
+    driver: local
