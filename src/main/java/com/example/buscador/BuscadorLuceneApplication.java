@@ -124,6 +124,7 @@ public class BuscadorLuceneApplication {
 							doc.get("description"));
 				}
 			} else {
+
 				System.out.println("❌ No se encontraron resultados.");
 			}
 		}
